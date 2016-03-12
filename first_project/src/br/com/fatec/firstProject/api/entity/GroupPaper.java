@@ -1,16 +1,14 @@
 package br.com.fatec.firstProject.api.entity;
 
-public class Paper {
-	public static final String TABLE = "PROJ_PAPER";
+public class GroupPaper {
+	public static final String TABLE = "PROJ_GROUP_PAPER";
 	public static final String COL_ID = "ID";
 	public static final String COL_NAME = "NAME";
 	public static final String COL_DESCRIPTION = "DESCRIPTION";
-	public static final String COL_GROUP_ID = "GROUP_PAPER_ID";
 	
 	private Long id;
 	private String nome;
 	private String descricao;
-	private GroupPaper grupoPapelId;
 	
 	public Long getId() {
 		return id;
