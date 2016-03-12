@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+	dbchangelog-3.4.xsd
+	http://www.liquibase.org/xml/ns/dbchangelog-ext
+	http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+	<changeSet id="010" author="thiago.fortunato">
+		<createTable tableName="PROJ_USER">
+			<column name="ID" type="java.sql.Types.BIGINT" />
+			<column name="NAME" type="java.sql.Types.VARCHAR(30)" />
+			<column name="LOGIN" type="java.sql.Types.VARCHAR(30)" />
+			<column name="PASSWORD" type="java.sql.Types.VARCHAR(30)" />
+		</createTable>		
+	</changeSet>
+	
+	<changeSet id="020" author="thiago.fortunato">
+		<createTable tableName="PROJ_PAPER">
+			<column name="ID" type="java.sql.Types.BIGINT"/>
+			<column name="NAME" type="java.sql.Types.VARCHAR(30)" />
+			<column name="DESC" type="java.sql.Types.VARCHAR(30)" />
+			<column name="GROUP_PAPER_ID" type="java.sql.Types.BIGINT" />
+		</createTable>		
+	</changeSet>
+	
+	<changeSet id="030" author="thiago.fortunato">
+		<createTable tableName="PROJ_GROUP_PAPER">
+			<column name="ID" type="java.sql.Types.BIGINT"/>
+			<column name="NAME" type="java.sql.Types.VARCHAR(30)" />
+			<column name="DESCRIPTION" type="java.sql.Types.VARCHAR(30)" />
+		</createTable>
+	</changeSet>
+		
+	<changeSet id="040" author="thiago.fortunato">
+		<addPrimaryKey columnNames="ID" tableName="PROJ_USER" />
+		<addPrimaryKey columnNames="ID" tableName="PROJ_PAPER" />
+		<addPrimaryKey columnNames="ID" tableName="PROJ_GROUP_PAPER" />		
+	</changeSet>
+	
+	<changeSet author="thiago.fortunato" id="050" dbms="oracle, hsqldb, postgresql">
+    	<createSequence 
+            incrementBy="1"
+            sequenceName="SEQ_PROJ_PAPER"
+            startValue="1" />
+            
+   		<createSequence 
+            incrementBy="1"
+            sequenceName="SEQ_PROJ_GROUP_PAPER"
+            startValue="1" />
+            
+   		<createSequence 
+            incrementBy="1"
+            sequenceName="SEQ_PROJ_USER"
+            startValue="1" />
+	</changeSet>
+	
+	<changeSet author="thiago.fortunato" id="060" dbms="mysql">
+    	<addAutoIncrement tableName="PROJ_PAPER" columnName="ID"
+    		columnDataType="bigint" />
+	</changeSet>
+	
+	<changeSet author="thiago.fortunato" id="060.1" dbms="mysql">
+    	<addAutoIncrement tableName="PROJ_GROUP_PAPER" columnName="ID"
+    		columnDataType="bigint" />
+	</changeSet>
+	
+	<changeSet author="thiago.fortunato" id="060.2" dbms="mysql">
+    	<addAutoIncrement tableName="PROJ_USER" columnName="ID"
+    		columnDataType="bigint" />
+	</changeSet>	
+	
+	<changeSet id="050" author="thiago.fortunato">
+		<addForeignKeyConstraint constraintName="FK_PAPERGROUP_PAPER_GROUP" 
+								 referencedTableName="PROJ_GROUP_PAPER" 
+								 baseColumnNames="GROUP_PAPER_ID" 
+								 baseTableName="PROJ_PAPER" 
+								 referencedColumnNames="ID" />
+	</changeSet>
+	
+	<changeSet id="060" author="thiago.fortunato">
+		<createTable tableName="USER_GROUP_PAPER">
+			<column name="ID_USER" type="java.sql.Types.BIGINT"/>
+			<column name="ID_GROUP_PAPER" type="java.sql.Types.BIGINT" />
+		</createTable>
+	</changeSet>
+	
+	<changeSet id="070" author="thiago.fortunato">
+		<createTable tableName="USER_PAPER">
+			<column name="ID_USER" type="java.sql.Types.BIGINT"/>
+			<column name="ID_PAPER" type="java.sql.Types.BIGINT" />
+		</createTable>
+	</changeSet>
+	
+	<changeSet id="080" author="thiago.fortunato">
+		<addPrimaryKey columnNames="ID_USER, ID_GROUP_PAPER" tableName="USER_GROUP_PAPER"/>
+		<addPrimaryKey columnNames="ID_USER, ID_PAPER" tableName="USER_PAPER"/>		
+	</changeSet>
+	
+	<changeSet id="090" author="thiago.fortunato">
+		<addForeignKeyConstraint constraintName="FK_USERPAPER_USER" 
+								 referencedTableName="PROJ_USER" 
+								 baseColumnNames="ID_USER" 
+								 baseTableName="USER_PAPER" 
+								 referencedColumnNames="ID" />
+	</changeSet>
+	
+	<changeSet id="100" author="thiago.fortunato">
+		<addForeignKeyConstraint constraintName="FK_USERPAPER_PAPER" 
+								 referencedTableName="PROJ_PAPER" 
+								 baseColumnNames="ID_PAPER" 
+								 baseTableName="USER_PAPER"
+								 referencedColumnNames="ID" />
+	</changeSet>
+	
+	
+	<changeSet id="110" author="thiago.fortunato">
+		<addForeignKeyConstraint constraintName="FK_USERGROUPPAPER_GROUP_PAPER" 
+								 referencedTableName="PROJ_GROUP_PAPER" 
+								 baseColumnNames="ID_GROUP_PAPER" 
+								 baseTableName="USER_GROUP_PAPER" 
+								 referencedColumnNames="ID" />
+	</changeSet>
+	
+	<changeSet id="120" author="thiago.fortunato">
+		<addForeignKeyConstraint constraintName="FK_USERGROUPPAPER_USER" 
+								 referencedTableName="PROJ_USER" 
+								 baseColumnNames="ID_USER"
+								 baseTableName="USER_GROUP_PAPER" 
+								 referencedColumnNames="ID" />
+	</changeSet>
+	
+</databaseChangeLog>
