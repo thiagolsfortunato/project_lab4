@@ -1,5 +1,9 @@
 package br.com.fatec.firstProject.api.entity;
 
+import java.util.List;
+
+import com.google.common.collect.Lists;
+
 public class Paper {
 	public static final String TABLE = "PROJ_PAPER";
 	public static final String COL_ID = "ID";
@@ -8,27 +12,47 @@ public class Paper {
 	public static final String COL_GROUP_ID = "GROUP_PAPER_ID";
 	
 	private Long id;
-	private String nome;
-	private String descricao;
-	private GroupPaper grupoPapelId;
+	private String name;
+	private String description;
+	private GroupPaper grupoPaperId;
+		
+	public Paper(Long id, String name, String description, GroupPaper grupoPaperId) {
+		this.id = id;
+		this.name = name;
+		this.description = description;
+		this.grupoPaperId = grupoPaperId;
+	}
 	
 	public Long getId() {
 		return id;
 	}
+	
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public String getNome() {
-		return nome;
+	
+	public String getName() {
+		return name;
 	}
-	public void setNome(String nome) {
-		this.nome = nome;
+	
+	public void setName(String name) {
+		this.name = name;
 	}
+	
 	public String getDescricao() {
-		return descricao;
+		return description;
 	}
+	
 	public void setDescricao(String descricao) {
-		this.descricao = descricao;
+		this.description = descricao;
+	}
+	
+	public static List<String> getColumns() {
+		return Lists.newArrayList(COL_ID, COL_NAME, COL_DESCRIPTION, COL_GROUP_ID);
+	}
+
+	public static String[] getColuMnsArray() {
+		return new String[] {COL_ID, COL_NAME, COL_DESCRIPTION, COL_GROUP_ID};
 	}
 	
 }

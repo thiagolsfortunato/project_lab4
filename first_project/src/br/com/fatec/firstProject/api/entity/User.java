@@ -1,5 +1,9 @@
 package br.com.fatec.firstProject.api.entity;
 
+import java.util.List;
+
+import com.google.common.collect.Lists;
+
 public class User {
 	
 	public static final String TABLE = "PROJ_USER";
@@ -54,4 +58,13 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}	
+	
+	public static List<String> getColumns() {
+		return Lists.newArrayList(COL_ID, COL_NAME, COL_LOGIN, COL_PASSWORD);
+	}
+
+	public static String[] getColumnsArray() {
+		return new String[] {COL_ID, COL_NAME, COL_LOGIN, COL_PASSWORD};
+	}
+	
 }
