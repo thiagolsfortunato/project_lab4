@@ -57,4 +57,14 @@ public class DAOUtils {
 		}
 		return null;		
 	}
+	
+	public static String preparePlaceHolders(int length) {
+		return StringUtils.join(Collections.nCopies(length, "?"), ",");
+	}
+
+	public static void setValues(PreparedStatement preparedStatement, List<Long> values) throws SQLException {
+		for (int i = 0; i < values.size(); i++) {
+			preparedStatement.setObject(i + 1, values.get(i));
+		}
+	}
 }
