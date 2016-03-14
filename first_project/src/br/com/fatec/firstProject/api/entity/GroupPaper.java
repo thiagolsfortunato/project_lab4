@@ -14,6 +14,12 @@ public class GroupPaper {
 	private String name;
 	private String description;
 	
+	public GroupPaper(){};
+	
+	public GroupPaper(Long groupPaperId){
+		this.id = groupPaperId;
+	}
+	
 	public Long getId() {
 		return id;
 	}

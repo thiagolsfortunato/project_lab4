@@ -16,11 +16,13 @@ public class Paper {
 	private String description;
 	private GroupPaper grupoPaperId;
 		
+	public Paper(){};
+	
 	public Paper(Long id, String name, String description, GroupPaper grupoPaperId) {
 		this.id = id;
 		this.name = name;
 		this.description = description;
-		this.grupoPaperId = grupoPaperId;
+		this.setGrupoPaperId(grupoPaperId);
 	}
 	
 	public Long getId() {
@@ -47,12 +49,19 @@ public class Paper {
 		this.description = descricao;
 	}
 	
+	public GroupPaper getGrupoPaperId() {
+		return grupoPaperId;
+	}
+
+	public void setGrupoPaperId(GroupPaper grupoPaperId) {
+		this.grupoPaperId = grupoPaperId;
+	}
+	
 	public static List<String> getColumns() {
 		return Lists.newArrayList(COL_ID, COL_NAME, COL_DESCRIPTION, COL_GROUP_ID);
 	}
 
 	public static String[] getColuMnsArray() {
 		return new String[] {COL_ID, COL_NAME, COL_DESCRIPTION, COL_GROUP_ID};
-	}
-	
+	}	
 }

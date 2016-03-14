@@ -30,20 +30,20 @@ public class GroupPaperDTOConverter implements DTOConverter<GroupPaper, GroupPap
 
 	@Override
 	public List<GroupPaperDTO> toDTO(List<GroupPaper> listGroupPaper) {
-		List<GroupPaperDTO> groupPaperDTO = Lists.newArrayList();
+		List<GroupPaperDTO> listGroupPaperDTO = Lists.newArrayList();
 		for (GroupPaper groupPaper : listGroupPaper) {
-			groupPaperDTO.addAll(this.toDTO(listGroupPaper));
+			listGroupPaperDTO.addAll(this.toDTO(listGroupPaper));
 		}
-		return groupPaperDTO;
+		return listGroupPaperDTO;
 	}
 	
 	@Override
 	public List<GroupPaper> toEntity(List<GroupPaperDTO> listGroupPaperDTO) {
-		List<GroupPaper> groupPaper = Lists.newArrayList();
+		List<GroupPaper> listGroupPaper = Lists.newArrayList();
 		for(GroupPaperDTO groupPaperDTO : listGroupPaperDTO){
-			groupPaper.add(this.toEntity(groupPaperDTO));
+			listGroupPaper.add(this.toEntity(groupPaperDTO));
 		}
-		return groupPaper;
+		return listGroupPaper;
 	}
 
 }
